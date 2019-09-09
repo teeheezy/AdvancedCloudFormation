@@ -17,14 +17,14 @@
     "EC2": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "ImageId": "ami-0080e4c5bc078760e",
+        "ImageId": "ami-00eb20669e0990cb4",
         "InstanceType": "t2.micro"
       }
     },
     "S3": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "wp-xxxxxxxxxxx"
+        "BucketName": "wp-teoguru"
       }
     }
   }
