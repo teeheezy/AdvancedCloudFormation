@@ -24,7 +24,7 @@
     "S3": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "wp-teoguru"
+        "BucketName": "wp-t1m2l3456"
       }
     }
   }
