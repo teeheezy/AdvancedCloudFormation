@@ -20,7 +20,7 @@ Parameters:
 Mappings:
   RegionMap:
     us-east-1:
-      AMALINUX: ami-0080e4c5bc078760e
+      AMALINUX: ami-00eb20669e0990cb4
     us-east-2:
       AMALINUX: ami-0cd3dfa4e37921605
     us-west-1:
