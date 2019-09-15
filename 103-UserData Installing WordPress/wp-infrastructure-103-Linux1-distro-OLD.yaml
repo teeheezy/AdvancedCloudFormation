@@ -83,24 +83,18 @@ Resources:
         "Fn::Base64":
           !Sub |
             #!/bin/bash
-            sudo yum -y install epel-release  
-            sudo yum-config-manager --enable remi-php72  
-            yum update -y && yum install -y httpd24 php70 mysql56-server php70-mysqlnd
-            chkconfig httpd on  
-            service httpd start  
-            cd /var/www/html  
+            yum install httpd php-5.6.0 mysql php-mysql -y
+            yum update -y
+            chkconfig httpd on
+            service httpd start
+            cd /var/www/html
             wget https://wordpress.org/latest.tar.gz
-            tar -zxvf latest.tar.gz --strip 1 
+            tar -zxvf latest.tar.gz --strip 1
             rm latest.tar.gz
-            cp wp-config-sample.php wp-config.php  
-            sed -i 's/database_name_here/${DatabaseName}/g' wp-config.php  
-            sed -i 's/localhost/${DB.Endpoint.Address}/g' wp-config.php  
-            sed -i 's/username_here/${DatabaseUser}/g' wp-config.php  
+            cp wp-config-sample.php wp-config.php
+            sed -i 's/database_name_here/${DatabaseName}/g' wp-config.php
+            sed -i 's/localhost/${DB.Endpoint.Address}/g' wp-config.php
+            sed -i 's/username_here/${DatabaseUser}/g' wp-config.php
             sed -i 's/password_here/${DatabasePassword}/g' wp-config.php
   S3:
     Type: "AWS::S3::Bucket"
-
-
-    #I was able to get this to work going to Amazon documentation on setting up a LAMP server: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-LAMP.html
-    #In the cloud formation template, replace the yum install line with "yum install -y httpd24 php70 mysql56-server php70-mysqlnd".
-    #Also, make sure you run yum -y update before the install line and not after.

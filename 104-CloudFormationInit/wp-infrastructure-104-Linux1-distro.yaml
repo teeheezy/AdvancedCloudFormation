@@ -123,11 +123,11 @@ Resources:
           services:
             sysvinit:
               cfn-hup:
-                enabled: "true"
-                ensureRunning: "true"
+                enabled: "true"                                   #ensure service is started on boot
+                ensureRunning: "true"                             #directs CFN-Init to start the service after the processing finishes
                 files:
-                  - "/etc/cfn/cfn-hup.conf"
-                  - "/etc/cfn/hooks.d/cfn-auto-reloader.conf"
+                  - "/etc/cfn/cfn-hup.conf"                       #if these files are changed or executed then a service restart will be initiated
+                  - "/etc/cfn/hooks.d/cfn-auto-reloader.conf"     #if these files are changed or executed then a service restart will be initiated
         install_wordpress:
           packages:
             yum:
@@ -136,7 +136,7 @@ Resources:
               mysql: []
               php-mysql: []
           sources:
-            /var/www/html: "http://wordpress.org/latest.tar.gz"
+            /var/www/html: "http://wordpress.org/latest.tar.gz"   #directs CFN_Init to download the contents of the URL into the path specified (/var/www/html)
           services:
             sysvinit:
               httpd:
@@ -145,9 +145,9 @@ Resources:
         config_wordpress:
           commands:
             01_clone_config:
-              cwd: "/var/www/html/wordpress"
-              test: "test ! -e /var/www/html/wordpress/wp-config.php"
-              command: "cp wp-config-sample.php wp-config.php"
+              cwd: "/var/www/html/wordpress"                               #change working directory
+              test: "test ! -e /var/www/html/wordpress/wp-config.php"      #test if file exists
+              command: "cp wp-config-sample.php wp-config.php"             #run command if test is false
             02_inject_dbhost:
               cwd: "/var/www/html/wordpress"
               command: !Sub |
